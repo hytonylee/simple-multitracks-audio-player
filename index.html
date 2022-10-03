@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/wavesurfer.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <title>Multi Track Audios</title>
+</head>
+<body>
+  <h1>Audio Track #1</h1>
+  <div class="controlWrapper">
+
+    <button class="play">Play</button>
+    <button class="pause">Pause</button>
+    <input type="button" onclick="location.href='/track2.html';" value="Next" />
+  </div>
+  <div class="audioWrapper" id="audio1"></div>
+  <div class="audioWrapper" id="audio2"></div>
+
+</body>
+</html>
+
+<script>
+
+  let isPlay = false;
+
+  const audio1 = WaveSurfer.create({
+    container: '#audio1',
+    waveColor: "LightGrey",
+    progressColor: "Grey",
+    cursorColor: "Grey",
+    barWidth: 3,
+    barRadius: 3,
+    responsive: true,
+    height: 150,
+    normalize: true,
+    partialRender: true,
+    hideScrollbar: true,
+  });
+
+  const audio2 = WaveSurfer.create({
+    container: '#audio2',
+    waveColor: "LightGrey",
+    progressColor: "Grey",
+    cursorColor: "Grey",
+    barWidth: 3,
+    barRadius: 3,
+    responsive: true,
+    height: 150,
+    normalize: true,
+    partialRender: true,
+    hideScrollbar: true,
+  });
+
+  audio1.load('./audio/Aria1.mp3');
+  audio2.load('./audio/Aria2.mp3');
+
+  const playBtn = document.querySelector('.play');
+  const pauseBtn = document.querySelector('.pause');
+
+  playBtn.addEventListener('click', function(){
+    if(audio1 && audio2){
+      console.log(isPlay);
+      if(isPlay === false) {
+        audio1.play();
+        audio2.play();
+        isPlay = true;
+      }
+    }
+  })
+
+  pauseBtn.addEventListener('click', function(){
+    console.log(isPlay);
+    if(audio1 && audio2) {
+      if(isPlay === true) {
+        audio1.playPause();
+        audio2.playPause();
+        isPlay = false;
+      }
+    }
+  })
+    
+</script>

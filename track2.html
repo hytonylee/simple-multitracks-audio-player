@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/wavesurfer.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <title>Multi Track Audios</title>
+</head>
+
+<body>
+  <h1>Audio Track #2</h1>
+  <div class="controlWrapper">
+
+    <input type="button" onclick="location.href='/index.html';" value="Previous" />
+    <button class="play">Play</button>
+    <button class="pause">Pause</button>
+  </div>
+  <div class="audioWrapper" id="audio1"></div>
+  <div class="audioWrapper" id="audio2"></div>
+  <div class="audioWrapper" id="audio3"></div>
+  <div class="audioWrapper" id="audio4"></div>
+  <div class="audioWrapper" id="audio5"></div>
+  <div class="audioWrapper" id="audio6"></div>
+  <div class="audioWrapper" id="audio7"></div>
+  <div class="audioWrapper" id="audio8"></div>
+  <div class="audioWrapper" id="audio9"></div>
+  <div class="audioWrapper" id="audio10"></div>
+  <div class="audioWrapper" id="audio11"></div>
+  <div class="audioWrapper" id="audio12"></div>
+  <div class="audioWrapper" id="audio13"></div>
+
+</body>
+
+</html>
+
+<script>
+
+  let isPlay = false;
+  let numTracks = 13;
+  const audioArray = [];
+
+  const createPlayer = (index) => {
+    return WaveSurfer.create({
+      container: `#audio${index}`,
+      waveColor: "LightGrey",
+      progressColor: "Grey",
+      cursorColor: "Grey",
+      barWidth: 3,
+      barRadius: 3,
+      responsive: true,
+      height: 150,
+      normalize: true,
+      partialRender: true,
+      hideScrollbar: true,
+    });
+  }
+
+  for(let i = 1; i <= numTracks; i++ ){
+    const audio = WaveSurfer.create({
+      container: `#audio${i}`,
+      waveColor: "LightGrey",
+      progressColor: "Grey",
+      cursorColor: "Grey",
+      barWidth: 3,
+      barRadius: 3,
+      responsive: true,
+      height: 150,
+      normalize: true,
+      partialRender: true,
+      hideScrollbar: true,
+    });
+    audio.load(`./audio/Flute${i}.mp3`)
+    audioArray.push(audio);
+  }
+
+  const playBtn = document.querySelector('.play');
+  const pauseBtn = document.querySelector('.pause');
+
+  playBtn.addEventListener('click', function () {
+    if (audio1 && audio2 && audio3 && audio4 && audio5 && audio6 && audio7 && audio8 && audio9 && audio10 && audio11 && audio12 && audio13) {
+      console.log(isPlay);
+      if (isPlay === false) {
+        audioArray.map(audio => {
+          audio.play();
+        })
+        isPlay = true;
+      }
+    }
+  })
+
+  pauseBtn.addEventListener('click', function () {
+    console.log(isPlay);
+    if (audio1 && audio2 && audio3 && audio4 && audio5 && audio6 && audio7 && audio8 && audio9 && audio10 && audio11 && audio12 && audio13) {
+      if (isPlay === true) {
+         audioArray.map(audio => {
+          audio.playPause();
+        })
+        isPlay = false;
+      }
+    }
+  })
+
+</script>
